@@ -1,0 +1,1 @@
+#I created the S3 bucket manually for providing a backend here. In another environment I would be using another directory for creating the S3 buckets with GitOps.

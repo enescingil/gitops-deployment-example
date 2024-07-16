@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-one
+  labels:
+    app: service-one
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service-one
+  template:
+    metadata:
+      labels:
+        app: service-one
+    spec:
+      containers:
+        - name: service-one
+          image: nginx
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-two
+  labels:
+    app: service-two
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service-two
+  template:
+    metadata:
+      labels:
+        app: service-two
+    spec:
+      containers:
+        - name: service-two
+          image: httpd
+          ports:
+            - containerPort: 80

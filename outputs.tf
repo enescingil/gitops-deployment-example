@@ -1,7 +1,7 @@
 output "db_instance_endpoint" {
-  value = aws_db_instance.default.endpoint
+  value = aws_db_instance.dbexample.endpoint
 }
 
 output "db_password_arn" {
-  value = aws_secretsmanager_secret.db_password.arn
+  value = aws_secretsmanager_secret.db_password_latest.arn
 }

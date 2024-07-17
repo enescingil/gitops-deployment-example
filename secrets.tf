@@ -1,13 +1,13 @@
-resource "aws_secretsmanager_secret" "db_password" {
-  name        = "rds_password"
-  description = "This secret contains the RDS database password"
+resource "aws_secretsmanager_secret" "db_password_latest" {
+  name        = "rds_password_latest_second"
+  description = "This secret contains the RDS database passwords"
 
   tags = {
-    Name = "RDSPasswordSecret"
+    Name = "RDSPasswordSecretLatestSecond"
   }
 }
 
 resource "aws_secretsmanager_secret_version" "db_password" {
-  secret_id     = aws_secretsmanager_secret.db_password.id
-  secret_string = "your-password" # Replace this with a secure password
+  secret_id     = aws_secretsmanager_secret.db_password_latest.id
+  secret_string = random_password.db_password.result
 }

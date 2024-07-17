@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+data:
+  cluster-autoscaler: |
+    ...
+    --nodes=1:10:<your-node-group>
+    ...

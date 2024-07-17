@@ -24,29 +24,29 @@
 # }
 
 # Create an IAM role for EKS
-resource "aws_iam_role" "my_eks_role" {
-    name = "my-eks-role"
-    assume_role_policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "eks.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-        }
-    ]
-}
-EOF
-}
+# resource "aws_iam_role" "my_eks_role" {
+#     name = "my-eks-role"
+#     assume_role_policy = <<EOF
+# {
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Effect": "Allow",
+#             "Principal": {
+#                 "Service": "eks.amazonaws.com"
+#             },
+#             "Action": "sts:AssumeRole"
+#         }
+#     ]
+# }
+# EOF
+# }
 
-# Attach the required policies to the IAM role
-resource "aws_iam_role_policy_attachment" "my_eks_role_policy_attachment" {
-    role       = aws_iam_role.my_eks_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-}
+# # Attach the required policies to the IAM role
+# resource "aws_iam_role_policy_attachment" "my_eks_role_policy_attachment" {
+#     role       = aws_iam_role.my_eks_role.name
+#     policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+# }
 
 module "eks_al2" {
   source  = "terraform-aws-modules/eks/aws"
@@ -64,7 +64,7 @@ module "eks_al2" {
 #   }
 
   vpc_id     = aws_vpc.my_vpc.id
-subnet_ids = [aws_subnet.private_subnet.id]
+subnet_ids = [aws_subnet.private_subnet.id, aws_subnet.public_subnet.id]
 
   eks_managed_node_groups = {
     example = {

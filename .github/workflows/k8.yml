@@ -5,15 +5,13 @@ on:
     branches:
       - main
     types:
-      - opened
-      - closed
       - synchronize
 
 jobs:
   iac-workflow:
-    uses: enescingil/common-iac/.github/workflows/iac.yml@main
+    uses: enescingil/common-iac/.github/workflows/k8-deployment.yml@main
     secrets: inherit
     with:
       service_account: gpc-tfiac-sa
-      project: gpc-net-p-spoke-prj
-      tf_version: 1.3.7
+      aws_region: us-east-2
+      k8s_namespace: nginx-deployment

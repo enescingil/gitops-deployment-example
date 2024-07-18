@@ -10,3 +10,6 @@ kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never --
 kubectl get hpa php-apache --watch
 
 # Autoscaling on multiple metrics and custom metrics
+https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+https://docs.aws.amazon.com/eks/latest/userguide/horizontal-pod-autoscaler.html
+https://aws.amazon.com/tr/blogs/opensource/horizontal-pod-autoscaling-eks/

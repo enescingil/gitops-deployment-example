@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cloudwatch-agent
+  namespace: amazon-cloudwatch
+  labels:
+    app: cloudwatch-agent
+spec:
+  selector:
+    matchLabels:
+      app: cloudwatch-agent
+  template:
+    metadata:
+      labels:
+        app: cloudwatch-agent
+    spec:
+      containers:
+        - name: cloudwatch-agent
+          image: amazon/cloudwatch-agent:latest
+          resources:
+            limits:
+              memory: 200Mi
+              cpu: 200m
+            requests:
+              memory: 200Mi
+              cpu: 100m
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/cloudwatch-agent
+            - name: log-volume
+              mountPath: /var/log
+      serviceAccountName: cloudwatch-agent
+      volumes:
+        - name: config-volume
+          configMap:
+            name: cloudwatch-agent-config
+        - name: log-volume
+          hostPath:
+            path: /var/log
